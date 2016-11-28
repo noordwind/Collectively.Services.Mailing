@@ -1,41 +1,59 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Coolector.Common.Domain;
 using Coolector.Common.Extensions;
+using Coolector.Services.Mailing.Domain;
+using Coolector.Services.Mailing.Repositories;
 
 namespace Coolector.Services.Mailing.Services
 {
     public class SendGridEmailMessenger : IEmailMessenger
     {
         private readonly ISendGridClient _sendGridClient;
+        private readonly IEmailTemplateRepository _emailTemplateRepository;
+        private readonly SendGridSettings _sendGridSettings;
 
-        public SendGridEmailMessenger(ISendGridClient sendGridClient)
+        public SendGridEmailMessenger(ISendGridClient sendGridClient,
+            IEmailTemplateRepository emailTemplateRepository,
+            SendGridSettings sendGridSettings)
         {
             _sendGridClient = sendGridClient;
+            _emailTemplateRepository = emailTemplateRepository;
+            _sendGridSettings = sendGridSettings;
         }
 
-        public async Task SendPasswordResetAsync(string email, string token)
+        public async Task SendResetPasswordAsync(string email, string endpoint, string token, string culture)
         {
-            //TODO: Fetch template and parameters from database.
-            var templateId = "4febd104-85b1-4b57-a07f-85805b4e4241";
-            var resetPasswordUrl = $"https://coolector.tk/set-new-password?email={email}&token={token}";
-            var templateParameters = new List<SendGridEmailTemplateParameter>
-            {
-                SendGridEmailTemplateParameter.Create("resetPasswordUrl", resetPasswordUrl),
-            };
-            var emailMessage = CreateMessage(email, "no-reply@coolector.tk", "Reset Coolector account password");
-            ApplyTemplate(emailMessage, templateId, templateParameters);
+            var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.ResetPassword, culture);
+            var resetPasswordUrl = $"{endpoint}?email={email}&token={token}";
+            var emailMessage = CreateMessage(email, template.Subject);
+            ApplyTemplate(template.TemplateId, emailMessage,
+                EmailTemplateParameter.Create("resetPasswordUrl", resetPasswordUrl));
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
-        private SendGridEmailMessage CreateMessage(string receiver, string sender,
+        private async Task<EmailTemplate> GetTemplateOrFallbackToDefaultOrFailAsync(string codename, string culture)
+        {
+            var template = await _emailTemplateRepository.GetByCodenameAsync(codename, culture);
+            if (template.HasValue)
+                return template.Value;
+
+            template = await _emailTemplateRepository.GetByCodenameAsync(codename, _sendGridSettings.DefaultCulture);
+            if (template.HasValue)
+                return template.Value;
+
+            throw new ServiceException($"Email template: '{codename}' has not been found.");
+        }
+
+        private SendGridEmailMessage CreateMessage(string receiver,
             string subject, string message = null)
         {
             var emailMessage = new SendGridEmailMessage
             {
                 From = new SendGridEmailMessage.Person
                 {
-                    Email = sender
+                    Email = _sendGridSettings.NoReplyEmailAccount
                 },
                 Subject = subject,
                 Personalizations = new List<SendGridEmailMessage.Personalization>()
@@ -65,13 +83,13 @@ namespace Coolector.Services.Mailing.Services
             return emailMessage;
         }
 
-        private void ApplyTemplate(SendGridEmailMessage emailMessage, string templateId,
-            IEnumerable<SendGridEmailTemplateParameter> templateParameters)
+        private void ApplyTemplate(string templateId, SendGridEmailMessage emailMessage,
+            params EmailTemplateParameter[] parameters)
         {
             emailMessage.Content = null;
             emailMessage.TemplateId = templateId;
             var personalization = emailMessage.Personalizations.First();
-            foreach (var parameter in templateParameters)
+            foreach (var parameter in parameters)
             {
                 var parameterValue = string.Format("{0}", parameter.Values.FirstOrDefault());
                 personalization.Substitutions[$"-{parameter.ReplacementTag}-"] = parameterValue;

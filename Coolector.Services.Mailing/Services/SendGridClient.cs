@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Coolector.Common.Domain;
+using Coolector.Services.Mailing.Domain;
 using Newtonsoft.Json;
 using NLog;
 

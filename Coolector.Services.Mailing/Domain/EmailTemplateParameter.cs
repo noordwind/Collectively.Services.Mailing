@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Coolector.Services.Mailing.Services
+namespace Coolector.Services.Mailing.Domain
 {
-    public class SendGridEmailTemplateParameter
+    public class EmailTemplateParameter
     {
         public string ReplacementTag { get; }
         public IEnumerable<string> Values { get; }
 
-        public SendGridEmailTemplateParameter(string replacementTag, params string[] values)
+        protected EmailTemplateParameter(string replacementTag, params string[] values)
         {
             if (string.IsNullOrWhiteSpace(replacementTag))
                 throw new ArgumentException("Replacement tag can not be empty", nameof(replacementTag));
@@ -20,7 +20,7 @@ namespace Coolector.Services.Mailing.Services
             Values = values;
         }
 
-        public static SendGridEmailTemplateParameter Create(string replacementTag, params string[] values)
-            => new SendGridEmailTemplateParameter(replacementTag, values);
+        public static EmailTemplateParameter Create(string replacementTag, params string[] values)
+            => new EmailTemplateParameter(replacementTag, values);
     }
 }

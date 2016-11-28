@@ -6,6 +6,7 @@ using Coolector.Common.Commands;
 using Coolector.Common.Extensions;
 using Coolector.Common.Mongo;
 using Coolector.Common.Nancy;
+using Coolector.Services.Mailing.Repositories;
 using Coolector.Services.Mailing.Services;
 using Microsoft.Extensions.Configuration;
 using Nancy;
@@ -59,10 +60,13 @@ namespace Coolector.Services.Mailing.Framework
             container.Update(builder =>
             {
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>());
+                builder.RegisterInstance(_configuration.GetSettings<SendGridSettings>());
                 builder.RegisterModule<MongoDbModule>();
                 builder.RegisterType<MongoDbInitializer>().As<IDatabaseInitializer>();
+                builder.RegisterType<DatabaseSeeder>().As<IDatabaseSeeder>();
                 builder.RegisterType<SendGridClient>().As<ISendGridClient>();
                 builder.RegisterType<SendGridEmailMessenger>().As<IEmailMessenger>();
+                builder.RegisterType<EmailTemplateRepository>().As<IEmailTemplateRepository>();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
                 builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
                 rmqRetryPolicy.Execute(() => builder
@@ -80,6 +84,11 @@ namespace Coolector.Services.Mailing.Framework
             var databaseSettings = container.Resolve<MongoDbSettings>();
             var databaseInitializer = container.Resolve<IDatabaseInitializer>();
             databaseInitializer.InitializeAsync();
+            if (databaseSettings.Seed)
+            {
+                var databaseSeeder = container.Resolve<IDatabaseSeeder>();
+                databaseSeeder.SeedAsync();
+            }
             pipelines.AfterRequest += (ctx) =>
             {
                 ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
