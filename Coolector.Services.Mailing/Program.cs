@@ -9,7 +9,7 @@ namespace Coolector.Services.Mailing
         public static void Main(string[] args)
         {
             WebServiceHost
-                .Create<Startup>(port: 10020)
+                .Create<Startup>(port: 10005)
                 .UseAutofac(Bootstrapper.LifetimeScope)
                 .UseRabbitMq(queueName: typeof(Program).Namespace)
                 .SubscribeToCommand<SendResetPasswordEmailMessage>()
