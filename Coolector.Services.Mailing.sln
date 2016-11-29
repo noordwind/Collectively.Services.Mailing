@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing", "Coolector.Services.Mailing/Coolector.Services.Mailing.xproj", "{7D67AB15-CEA6-471A-8562-2517D69A025B}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing.Tests", "Coolector.Services.Mailing.Tests\Coolector.Services.Mailing.Tests.xproj", "{914858D5-F3DA-4A2F-B270-96B08A07BE2C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing.Tests.EndToEnd", "Coolector.Services.Mailing.Tests.EndToEnd\Coolector.Services.Mailing.Tests.EndToEnd.xproj", "{89056627-4632-4B59-944C-E26F8B3FA834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{7D67AB15-CEA6-471A-8562-2517D69A025B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D67AB15-CEA6-471A-8562-2517D69A025B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D67AB15-CEA6-471A-8562-2517D69A025B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914858D5-F3DA-4A2F-B270-96B08A07BE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914858D5-F3DA-4A2F-B270-96B08A07BE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914858D5-F3DA-4A2F-B270-96B08A07BE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914858D5-F3DA-4A2F-B270-96B08A07BE2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89056627-4632-4B59-944C-E26F8B3FA834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89056627-4632-4B59-944C-E26F8B3FA834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89056627-4632-4B59-944C-E26F8B3FA834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89056627-4632-4B59-944C-E26F8B3FA834}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
