@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Coolector.Common.Commands;
 using Coolector.Common.Commands.Mailing;
+using Coolector.Common.Events.Users;
 using Coolector.Services.Mailing.Services;
 using RawRabbit;
 
@@ -21,6 +22,7 @@ namespace Coolector.Services.Mailing.Handlers
         {
             await _emailMessenger.SendResetPasswordAsync(command.Email,
                 command.Endpoint, command.Token, command.Request.Culture);
+            await _bus.PublishAsync(new ResetPasswordInitiated(command.Request.Id, command.Email));
         }
     }
 }
