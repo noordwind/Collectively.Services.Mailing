@@ -1,6 +1,7 @@
 ﻿using System;
 using Coolector.Common.Commands;
 using Coolector.Common.Commands.Mailing;
+using Coolector.Common.Services;
 using Coolector.Services.Mailing.Handlers;
 using Coolector.Services.Mailing.Services;
 using Machine.Specifications;
@@ -12,9 +13,10 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
 {
     public abstract class SendResetPasswordEmailMessageHandler_specs
     {
-        protected static SendResetPasswordEmailMessageHandler Handler;
+        protected static SendResetPasswordEmailMessageHandler CommandHandler;
         protected static Mock<IBusClient> BusClientMock;
         protected static Mock<IEmailMessenger> EmailMessengerMock;
+        protected static Mock<IHandler> HandlerMock;
         protected static SendResetPasswordEmailMessage Command;
         protected static Exception Exception;
 
@@ -22,6 +24,7 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
         {
             BusClientMock = new Mock<IBusClient>();
             EmailMessengerMock = new Mock<IEmailMessenger>();
+            HandlerMock = new Mock<IHandler>();
             Command = new SendResetPasswordEmailMessage
             {
                 Email = "test@coolector.com",
@@ -29,7 +32,8 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
                 Endpoint = "set-new-password",
                 Request = Request.Create<SendResetPasswordEmailMessage>(Guid.NewGuid(), "origin", "en-gb")
             };
-            Handler = new SendResetPasswordEmailMessageHandler(BusClientMock.Object, EmailMessengerMock.Object);
+            CommandHandler = new SendResetPasswordEmailMessageHandler(BusClientMock.Object,
+                EmailMessengerMock.Object, HandlerMock.Object);
         }
     }
 
@@ -42,7 +46,7 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
             Initialize();
         };
 
-        Because of = () => Handler.HandleAsync(Command).Await();
+        Because of = () => CommandHandler.HandleAsync(Command).Await();
 
         It should_invoke_send_reset_password_async_on_email_messenger = () =>
         {
