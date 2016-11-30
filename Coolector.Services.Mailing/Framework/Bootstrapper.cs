@@ -6,6 +6,7 @@ using Coolector.Common.Commands;
 using Coolector.Common.Extensions;
 using Coolector.Common.Mongo;
 using Coolector.Common.Nancy;
+using Coolector.Common.Services;
 using Coolector.Services.Mailing.Repositories;
 using Coolector.Services.Mailing.Services;
 using Microsoft.Extensions.Configuration;
@@ -67,6 +68,7 @@ namespace Coolector.Services.Mailing.Framework
                 builder.RegisterType<SendGridClient>().As<ISendGridClient>();
                 builder.RegisterType<SendGridEmailMessenger>().As<IEmailMessenger>();
                 builder.RegisterType<EmailTemplateRepository>().As<IEmailTemplateRepository>();
+                builder.RegisterType<Handler>().As<IHandler>().SingleInstance();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
                 builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
                 rmqRetryPolicy.Execute(() => builder

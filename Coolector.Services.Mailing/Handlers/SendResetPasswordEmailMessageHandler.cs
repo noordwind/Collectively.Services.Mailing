@@ -2,6 +2,7 @@
 using Coolector.Common.Commands;
 using Coolector.Common.Commands.Mailing;
 using Coolector.Common.Events.Users;
+using Coolector.Common.Services;
 using Coolector.Services.Mailing.Services;
 using RawRabbit;
 
@@ -11,18 +12,24 @@ namespace Coolector.Services.Mailing.Handlers
     {
         private readonly IBusClient _bus;
         private readonly IEmailMessenger _emailMessenger;
+        private readonly IHandler _handler;
 
-        public SendResetPasswordEmailMessageHandler(IBusClient bus, IEmailMessenger emailMessenger)
+        public SendResetPasswordEmailMessageHandler(IBusClient bus, IEmailMessenger emailMessenger,
+            IHandler handler)
         {
             _bus = bus;
             _emailMessenger = emailMessenger;
+            _handler = handler;
         }
 
         public async Task HandleAsync(SendResetPasswordEmailMessage command)
         {
-            await _emailMessenger.SendResetPasswordAsync(command.Email,
-                command.Endpoint, command.Token, command.Request.Culture);
-            await _bus.PublishAsync(new ResetPasswordInitiated(command.Request.Id, command.Email));
+            await _handler
+                .Run(() => _emailMessenger.SendResetPasswordAsync(command.Email,
+                    command.Endpoint, command.Token, command.Request.Culture))
+                .OnSuccess(() =>
+                        _bus.PublishAsync(new ResetPasswordInitiated(command.Request.Id, command.Email)))
+                .ExecuteAsync();
         }
     }
 }
