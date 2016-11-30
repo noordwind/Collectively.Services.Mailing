@@ -43,7 +43,8 @@ namespace Coolector.Services.Mailing.Services
             if (template.HasValue)
                 return template.Value;
 
-            throw new ServiceException($"Email template: '{codename}' has not been found.");
+            throw new ServiceException(OperationCodes.EmailTemplateNotFound,
+                $"Email template: '{codename}' has not been found.");
         }
 
         private SendGridEmailMessage CreateMessage(string receiver,

@@ -38,8 +38,9 @@ namespace Coolector.Services.Mailing.Services
 
                 return;
             }
-            throw new ServiceException("There was an error while sending an email message via SendGrid." +
-                                       $"Status code: {response.StatusCode}, reason: {response.ReasonPhrase}.");
+            throw new ServiceException(OperationCodes.EmailNotSent,
+                "There was an error while sending an email message via SendGrid." +
+                $"Status code: {response.StatusCode}, reason: {response.ReasonPhrase}.");
         }
     }
 }
