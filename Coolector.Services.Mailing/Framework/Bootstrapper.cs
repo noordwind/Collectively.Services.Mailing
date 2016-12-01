@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using Coolector.Common.Commands;
+using Coolector.Common.Exceptionless;
 using Coolector.Common.Extensions;
 using Coolector.Common.Mongo;
 using Coolector.Common.Nancy;
@@ -25,6 +26,7 @@ namespace Coolector.Services.Mailing.Framework
     public class Bootstrapper : AutofacNancyBootstrapper
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static IExceptionHandler _exceptionHandler;
         private readonly IConfiguration _configuration;
         public static ILifetimeScope LifetimeScope { get; private set; }
 
@@ -69,6 +71,8 @@ namespace Coolector.Services.Mailing.Framework
                 builder.RegisterType<SendGridEmailMessenger>().As<IEmailMessenger>();
                 builder.RegisterType<EmailTemplateRepository>().As<IEmailTemplateRepository>();
                 builder.RegisterType<Handler>().As<IHandler>().SingleInstance();
+                builder.RegisterInstance(_configuration.GetSettings<ExceptionlessSettings>()).SingleInstance();
+                builder.RegisterType<ExceptionlessExceptionHandler>().As<IExceptionHandler>().SingleInstance();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
                 builder.RegisterInstance(rawRabbitConfiguration).SingleInstance();
                 rmqRetryPolicy.Execute(() => builder
@@ -79,6 +83,17 @@ namespace Coolector.Services.Mailing.Framework
                 builder.RegisterAssemblyTypes(coreAssembly).AsClosedTypesOf(typeof(ICommandHandler<>));
             });
             LifetimeScope = container;
+        }
+
+        protected override void RequestStartup(ILifetimeScope container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.OnError.AddItemToEndOfPipeline((ctx, ex) =>
+            {
+                _exceptionHandler.Handle(ex, ctx.ToExceptionData(),
+                    "Request details", "Coolector", "Service", "Mailing");
+
+                return ctx.Response;
+            });
         }
 
         protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
@@ -98,6 +113,7 @@ namespace Coolector.Services.Mailing.Framework
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers",
                     "Authorization, Origin, X-Requested-With, Content-Type, Accept");
             };
+            _exceptionHandler = container.Resolve<IExceptionHandler>();
             Logger.Info("Coolector.Services.Mailing API has started.");
         }
     }
