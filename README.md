@@ -16,7 +16,7 @@ Within a few clicks you can greatly improve the overall tidiness of the place wh
 ----------------
 
 The **Coolector.Services.Mailing** is a service responsible for sending the email messages e.g. notifications, reset password procedures etc.
-In order to access the available commands, events and DTOs make use of the **Coolector.Services.Mailing.Shared** package.
+In order to access the available commands, events, DTOs and operation codes make use of the **Coolector.Services.Mailing.Shared** package.
 
 **Quick start**
 ----------------
@@ -34,16 +34,17 @@ git clone https://github.com/noordwind/Coolector.Docker
 
 Once executed, you shall be able to access the following services:
 
-|Name           |URL                                                |Repository 
-|---------------|---------------------------------------------------|------------------------------------------------------------------------------------------
-|API            |[http://localhost:5000](http://localhost:5000)     |[Coolector.Api](https://github.com/noordwind/Coolector.Api) 
-|**Mailing**    |**[http://localhost:10005](http://localhost:10005)**   |**[Coolector.Services.Mailing](https://github.com/noordwind/Coolector.Services.Mailing)** 
-|Operations     |[http://localhost:10000](http://localhost:10000)   |[Coolector.Services.Operations](https://github.com/noordwind/Coolector.Services.Operations) 
-|Remarks        |[http://localhost:10002](http://localhost:10002)   |[Coolector.Services.Remarks](https://github.com/noordwind/Coolector.Services.Remarks) 
-|SignalR        |[http://localhost:15000](http://localhost:15000)   |[Coolector.Services.SignalR](https://github.com/noordwind/Coolector.Services.SignalR) 
-|Storage        |[http://localhost:10000](http://localhost:10000)   |[Coolector.Services.Storage](https://github.com/noordwind/Coolector.Services.Storage) 
-|Users          |[http://localhost:10001](http://localhost:10001)   |[Coolector.Services.Users](https://github.com/noordwind/Coolector.Services.Users) 
-|Web            |[http://localhost:9000](http://localhost:9000)     |[Coolector.Web](https://github.com/noordwind/Coolector.Web) 
+|Name               |URL                                                  |Repository 
+|-------------------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------
+|API                |[http://localhost:5000](http://localhost:5000)       |[Coolector.Api](https://github.com/noordwind/Coolector.Api) 
+|**Mailing**        |**[http://localhost:10005](http://localhost:10005)** |**[Coolector.Services.Mailing](https://github.com/noordwind/Coolector.Services.Mailing)** 
+|Operations         |[http://localhost:10000](http://localhost:10000)     |[Coolector.Services.Operations](https://github.com/noordwind/Coolector.Services.Operations) 
+|Remarks            |[http://localhost:10002](http://localhost:10002)     |[Coolector.Services.Remarks](https://github.com/noordwind/Coolector.Services.Remarks) 
+|SignalR            |[http://localhost:15000](http://localhost:15000)     |[Coolector.Services.SignalR](https://github.com/noordwind/Coolector.Services.SignalR) 
+|Storage            |[http://localhost:10000](http://localhost:10000)     |[Coolector.Services.Storage](https://github.com/noordwind/Coolector.Services.Storage) 
+|Users              |[http://localhost:10001](http://localhost:10001)     |[Coolector.Services.Users](https://github.com/noordwind/Coolector.Services.Users) 
+|Web                |[http://localhost:9000](http://localhost:9000)       |[Coolector.Web](https://github.com/noordwind/Coolector.Web) 
+
 
 ## Classic way
 
