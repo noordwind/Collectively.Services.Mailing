@@ -5,6 +5,7 @@ using Coolector.Common.Domain;
 using Coolector.Common.Extensions;
 using Coolector.Services.Mailing.Domain;
 using Coolector.Services.Mailing.Repositories;
+using Coolector.Services.Mailing.Shared;
 
 namespace Coolector.Services.Mailing.Services
 {

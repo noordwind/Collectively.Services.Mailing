@@ -1,5 +1,4 @@
-﻿using Coolector.Common.Commands.Mailing;
-using Coolector.Services.Mailing.Domain;
+﻿using Coolector.Services.Mailing.Domain;
 using Coolector.Services.Mailing.Repositories;
 using Coolector.Services.Mailing.Services;
 using Machine.Specifications;

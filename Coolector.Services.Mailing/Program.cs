@@ -1,6 +1,6 @@
-﻿using Coolector.Common.Commands.Mailing;
-using Coolector.Common.Host;
+﻿using Coolector.Common.Host;
 using Coolector.Services.Mailing.Framework;
+using Coolector.Services.Mailing.Shared.Commands;
 
 namespace Coolector.Services.Mailing
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using Coolector.Common.Commands;
-using Coolector.Common.Commands.Mailing;
 using Coolector.Common.Services;
 using Coolector.Services.Mailing.Handlers;
 using Coolector.Services.Mailing.Services;
+using Coolector.Services.Mailing.Shared.Commands;
 using Machine.Specifications;
 using Moq;
 using RawRabbit;

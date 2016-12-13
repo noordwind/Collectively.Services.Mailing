@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing", "Coolector.Services.Mailing/Coolector.Services.Mailing.xproj", "{7D67AB15-CEA6-471A-8562-2517D69A025B}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing", "Coolector.Services.Mailing\Coolector.Services.Mailing.xproj", "{7D67AB15-CEA6-471A-8562-2517D69A025B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing.Tests", "Coolector.Services.Mailing.Tests\Coolector.Services.Mailing.Tests.xproj", "{914858D5-F3DA-4A2F-B270-96B08A07BE2C}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing.Tests.EndToEnd", "Coolector.Services.Mailing.Tests.EndToEnd\Coolector.Services.Mailing.Tests.EndToEnd.xproj", "{89056627-4632-4B59-944C-E26F8B3FA834}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Common", "..\Coolector.Common\Coolector.Common\Coolector.Common.xproj", "{BBB97E5E-7961-4D5C-8F7A-E8DE1E9612BB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Users.Shared", "..\Coolector.Services.Users\Coolector.Services.Users.Shared\Coolector.Services.Users.Shared.xproj", "{486A355E-6F1B-42B3-85FB-012767CB4FBB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Coolector.Services.Mailing.Shared", "Coolector.Services.Mailing.Shared\Coolector.Services.Mailing.Shared.xproj", "{F9460B53-7498-43B9-A24F-D261D55D854C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{89056627-4632-4B59-944C-E26F8B3FA834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89056627-4632-4B59-944C-E26F8B3FA834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89056627-4632-4B59-944C-E26F8B3FA834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB97E5E-7961-4D5C-8F7A-E8DE1E9612BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB97E5E-7961-4D5C-8F7A-E8DE1E9612BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB97E5E-7961-4D5C-8F7A-E8DE1E9612BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB97E5E-7961-4D5C-8F7A-E8DE1E9612BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486A355E-6F1B-42B3-85FB-012767CB4FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486A355E-6F1B-42B3-85FB-012767CB4FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486A355E-6F1B-42B3-85FB-012767CB4FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486A355E-6F1B-42B3-85FB-012767CB4FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9460B53-7498-43B9-A24F-D261D55D854C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9460B53-7498-43B9-A24F-D261D55D854C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9460B53-7498-43B9-A24F-D261D55D854C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9460B53-7498-43B9-A24F-D261D55D854C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

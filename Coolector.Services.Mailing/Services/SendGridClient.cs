@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Coolector.Common.Domain;
 using Coolector.Services.Mailing.Domain;
+using Coolector.Services.Mailing.Shared;
 using Newtonsoft.Json;
 using NLog;
 

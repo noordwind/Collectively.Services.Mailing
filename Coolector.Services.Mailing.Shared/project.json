@@ -1,0 +1,23 @@
+{
+  "name": "Coolector.Services.Mailing.Shared",
+  "authors": [ "Noordwind" ],
+  "title": "Coolector.Services.Mailing.Shared",
+  "version": "1.0.0-*",
+  "packOptions": {
+    "licenseUrl": "https://github.com/noordwind/Coolector.Services.Mailing/blob/master/LICENSE",
+    "projectUrl": "https://github.com/noordwind/Coolector.Services.Mailing",
+    "packageType": "DotnetCliTool"
+  },
+
+  "dependencies": {
+    "Coolector.Common": "1.0.*"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.1"
+      }
+    }
+  }
+}

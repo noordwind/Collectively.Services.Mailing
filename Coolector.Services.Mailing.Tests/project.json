@@ -17,6 +17,7 @@
     "dotnet-test-mspec": "*",
     "Moq": "4.6.38-alpha",
     "Coolector.Services.Mailing": "1.0.0-*",
+    "Coolector.Services.Mailing.Shared": "1.0.0-*",
     "Coolector.Common": "1.0.*"
   }
 }

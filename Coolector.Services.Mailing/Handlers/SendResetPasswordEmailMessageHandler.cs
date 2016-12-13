@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Coolector.Common.Commands;
-using Coolector.Common.Commands.Mailing;
 using Coolector.Common.Services;
 using Coolector.Services.Mailing.Services;
+using Coolector.Services.Mailing.Shared;
+using Coolector.Services.Mailing.Shared.Commands;
 using Coolector.Services.Users.Shared.Events;
 using RawRabbit;
 
