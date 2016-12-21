@@ -1,4 +1,4 @@
-﻿{
+{
   "testRunner": "mspec",
   "frameworks": {
       "netcoreapp1.1": {
@@ -11,13 +11,13 @@
       }
   },
   "dependencies": {
-    "FluentAssertions": "4.12.0",
+    "FluentAssertions": "4.18.0",
     "Machine.Specifications": "0.11.0",
     "Machine.Specifications.Should": "0.11.0",
     "dotnet-test-mspec": "*",
     "Moq": "4.6.38-alpha",
     "Coolector.Services.Mailing": "1.0.0-*",
-    "Coolector.Services.Mailing.Shared": "1.0.0-*",
+    "Coolector.Services.Mailing.Shared": "1.0.*",
     "Coolector.Common": "1.0.*"
   }
 }
