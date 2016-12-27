@@ -70,7 +70,7 @@ namespace Coolector.Services.Mailing.Framework
                 builder.RegisterType<SendGridClient>().As<ISendGridClient>();
                 builder.RegisterType<SendGridEmailMessenger>().As<IEmailMessenger>();
                 builder.RegisterType<EmailTemplateRepository>().As<IEmailTemplateRepository>();
-                builder.RegisterType<Handler>().As<IHandler>().SingleInstance();
+                builder.RegisterType<Handler>().As<IHandler>();
                 builder.RegisterInstance(_configuration.GetSettings<ExceptionlessSettings>()).SingleInstance();
                 builder.RegisterType<ExceptionlessExceptionHandler>().As<IExceptionHandler>().SingleInstance();
                 var rawRabbitConfiguration = _configuration.GetSettings<RawRabbitConfiguration>();
