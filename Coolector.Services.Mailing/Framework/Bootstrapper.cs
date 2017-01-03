@@ -7,6 +7,7 @@ using Coolector.Common.Exceptionless;
 using Coolector.Common.Extensions;
 using Coolector.Common.Mongo;
 using Coolector.Common.Nancy;
+using Coolector.Common.Security;
 using Coolector.Common.Nancy.Serialization;
 using Coolector.Common.RabbitMq;
 using Coolector.Common.Services;
@@ -62,9 +63,12 @@ namespace Coolector.Services.Mailing.Framework
                 builder.RegisterType<Handler>().As<IHandler>();
                 builder.RegisterInstance(_configuration.GetSettings<ExceptionlessSettings>()).SingleInstance();
                 builder.RegisterType<ExceptionlessExceptionHandler>().As<IExceptionHandler>().SingleInstance();
-                RabbitMqContainer.Register(builder, _configuration.GetSettings<RawRabbitConfiguration>());
+
                 var assembly = typeof(Startup).GetTypeInfo().Assembly;
                 builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>));
+
+                SecurityContainer.Register(builder, _configuration);
+                RabbitMqContainer.Register(builder, _configuration.GetSettings<RawRabbitConfiguration>());
             });
             LifetimeScope = container;
         }
@@ -97,6 +101,7 @@ namespace Coolector.Services.Mailing.Framework
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers",
                     "Authorization, Origin, X-Requested-With, Content-Type, Accept");
             };
+            pipelines.SetupTokenAuthentication(container);
             _exceptionHandler = container.Resolve<IExceptionHandler>();
             Logger.Info("Coolector.Services.Mailing API has started.");
         }
