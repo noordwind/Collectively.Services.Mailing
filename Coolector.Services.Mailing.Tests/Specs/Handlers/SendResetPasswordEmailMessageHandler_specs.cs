@@ -16,6 +16,7 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
         protected static SendResetPasswordEmailMessageHandler CommandHandler;
         protected static Mock<IBusClient> BusClientMock;
         protected static Mock<IEmailMessenger> EmailMessengerMock;
+        protected static Mock<IExceptionHandler> ExceptionHandlerMock;
         protected static IHandler Handler;
         protected static SendResetPasswordEmailMessage Command;
         protected static Exception Exception;
@@ -24,7 +25,8 @@ namespace Coolector.Services.Mailing.Tests.Specs.Handlers
         {
             BusClientMock = new Mock<IBusClient>();
             EmailMessengerMock = new Mock<IEmailMessenger>();
-            Handler = new Handler();
+            ExceptionHandlerMock = new Mock<IExceptionHandler>();
+            Handler = new Handler(ExceptionHandlerMock.Object);
             Command = new SendResetPasswordEmailMessage
             {
                 Email = "test@coolector.com",
