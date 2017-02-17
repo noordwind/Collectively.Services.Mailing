@@ -93,3 +93,4 @@ For the local testing purposes the *.local* or *.docker* configuration files are
 - **Coolector.Services.Mailing.Shared** - shared package containing events, commands, DTOs & operation codes.
 - **Coolector.Services.Mailing.Tests** - unit & integration tests executable via *dotnet test* command.
 - **Coolector.Services.Mailing.Tests.EndToEnd** - End-to-End tests executable via *dotnet test* command.
+
