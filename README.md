@@ -20,7 +20,7 @@ Within a few clicks you can greatly improve the overall tidiness of the place wh
 **Coolector.Services.Mailing**
 ----------------
 
-The **Coolector.Services.Mailing** is a service responsible for sending the email messages e.g. notifications, reset password procedures etc.
+The **Coolector.Services.Mailing** is a service responsible for sending the email messages such as notifications, reset password procedures etc.
 In order to access the available commands, events, DTOs and operation codes make use of the **Coolector.Services.Mailing.Shared** package.
 
 **Quick start**
