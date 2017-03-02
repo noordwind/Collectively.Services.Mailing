@@ -52,7 +52,7 @@ namespace Collectively.Services.Mailing.Framework
 
             container.Update(builder =>
             {
-                builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
+                builder.RegisterType<JsonNetSerializer>().As<JsonSerializer>().SingleInstance();
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>());
                 builder.RegisterInstance(_configuration.GetSettings<SendGridSettings>());
                 builder.RegisterModule<MongoDbModule>();
