@@ -8,7 +8,6 @@ using Collectively.Common.Extensions;
 using Collectively.Common.Mongo;
 using Collectively.Common.Nancy;
 using Collectively.Common.Security;
-using Nancy.Serialization.JsonNet;
 using Collectively.Common.RabbitMq;
 using Collectively.Common.Services;
 using Collectively.Services.Mailing.Repositories;
@@ -52,7 +51,7 @@ namespace Collectively.Services.Mailing.Framework
 
             container.Update(builder =>
             {
-                builder.RegisterType<JsonNetSerializer>().As<JsonSerializer>().SingleInstance();
+                builder.RegisterType<CustomJsonSerializer>().As<JsonSerializer>().SingleInstance();
                 builder.RegisterInstance(_configuration.GetSettings<MongoDbSettings>());
                 builder.RegisterInstance(_configuration.GetSettings<SendGridSettings>());
                 builder.RegisterModule<MongoDbModule>();
