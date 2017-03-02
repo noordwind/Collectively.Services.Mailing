@@ -1,5 +1,5 @@
 ﻿using System;
-using Collectively.Common.Commands;
+using Collectively.Messages.Commands;
 using Collectively.Common.Services;
 using Collectively.Services.Mailing.Handlers;
 using Collectively.Services.Mailing.Services;

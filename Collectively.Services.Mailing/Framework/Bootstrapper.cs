@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Autofac;
-using Collectively.Common.Commands;
+using Collectively.Messages.Commands;
 using Collectively.Common.Exceptionless;
 using Collectively.Common.Extensions;
 using Collectively.Common.Mongo;
