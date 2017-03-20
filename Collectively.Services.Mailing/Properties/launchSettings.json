@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Collectively.Services.Mailing": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:10005"
+    }
+  }
+}
