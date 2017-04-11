@@ -27,7 +27,7 @@ namespace Collectively.Services.Mailing.Handlers
                         command.RemarkId, command.Category, command.Address,
                         command.Username, command.Date, command.Culture, command.Comment);
                 })
-                .OnError((ex, logger) => logger.Error($"Error while handling {command.GetType().Name} command"))
+                .OnError((ex, logger) => logger.Error(ex, $"Error while handling {command.GetType().Name} command"))
                 .ExecuteAsync();
         }
     }

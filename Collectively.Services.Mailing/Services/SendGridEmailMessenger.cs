@@ -47,7 +47,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", date.ToString(new CultureInfo(culture))));
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)));
 
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
@@ -62,7 +62,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", date.ToString(new CultureInfo(culture))),
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
                 EmailTemplateParameter.Create("state", state));
 
             await _sendGridClient.SendMessageAsync(emailMessage);
@@ -78,7 +78,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", date.ToString(new CultureInfo(culture))),
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
                 EmailTemplateParameter.Create("comment", comment));
 
             await _sendGridClient.SendMessageAsync(emailMessage);
@@ -94,8 +94,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", date.ToString(new CultureInfo(culture))),
-                EmailTemplateParameter.Create("culture", culture));
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)));
 
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
@@ -162,6 +161,14 @@ namespace Collectively.Services.Mailing.Services
                 var parameterValue = string.Format("{0}", parameter.Values.FirstOrDefault());
                 personalization.Substitutions[$"-{parameter.ReplacementTag}-"] = parameterValue;
             }
+        }
+
+        private string GetDateTimeString(DateTime date, string culture)
+        {
+            var cultureInfo = new CultureInfo(culture);
+            var dateString = date.ToString("f", cultureInfo);
+
+            return dateString;
         }
     }
 }
