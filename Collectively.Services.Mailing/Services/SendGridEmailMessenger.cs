@@ -7,12 +7,13 @@ using Collectively.Common.Domain;
 using Collectively.Common.Extensions;
 using Collectively.Services.Mailing.Domain;
 using Collectively.Services.Mailing.Repositories;
-
+using NLog;
 
 namespace Collectively.Services.Mailing.Services
 {
     public class SendGridEmailMessenger : IEmailMessenger
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly ISendGridClient _sendGridClient;
         private readonly IEmailTemplateRepository _emailTemplateRepository;
         private readonly SendGridSettings _sendGridSettings;
@@ -33,6 +34,8 @@ namespace Collectively.Services.Mailing.Services
             var emailMessage = CreateMessage(email, template.Subject);
             ApplyTemplate(template.TemplateId, emailMessage,
                 EmailTemplateParameter.Create("resetPasswordUrl", resetPasswordUrl));
+
+            Logger.Debug($"Sending {EmailTemplates.ResetPassword} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
@@ -49,6 +52,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("username", username),
                 EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)));
 
+            Logger.Debug($"Sending {EmailTemplates.RemarkCreated} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
@@ -65,6 +69,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
                 EmailTemplateParameter.Create("state", state));
 
+            Logger.Debug($"Sending {EmailTemplates.RemarkStateChanged} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
@@ -81,6 +86,7 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
                 EmailTemplateParameter.Create("comment", comment));
 
+            Logger.Debug($"Sending {EmailTemplates.CommentAddedToRemark} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
