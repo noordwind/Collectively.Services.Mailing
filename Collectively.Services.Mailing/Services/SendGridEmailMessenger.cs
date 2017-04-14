@@ -41,7 +41,7 @@ namespace Collectively.Services.Mailing.Services
 
         public async Task SendRemarkCreatedAsync(string email, Guid remarkId, 
             string category, string address, string username, 
-            DateTime date, string culture)
+            DateTime date, string culture, string url)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.RemarkCreated, culture);
             var emailMessage = CreateMessage(email, template.Subject);
@@ -50,14 +50,15 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)));
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
+                EmailTemplateParameter.Create("url", url));
 
             Logger.Debug($"Sending {EmailTemplates.RemarkCreated} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
         public async Task SendRemarkStateChangedAsync(string email, Guid remarkId, string category, string address, string username,
-            DateTime date, string culture, string state)
+            DateTime date, string culture, string url, string state)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.RemarkStateChanged, culture);
             var emailMessage = CreateMessage(email, template.Subject);
@@ -67,14 +68,15 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
                 EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
-                EmailTemplateParameter.Create("state", state));
+                EmailTemplateParameter.Create("state", state),
+                EmailTemplateParameter.Create("url", url));
 
             Logger.Debug($"Sending {EmailTemplates.RemarkStateChanged} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
         public async Task SendCommentAddedToRemarkAsync(string email, Guid remarkId, string category, string address, string username,
-            DateTime date, string culture, string comment)
+            DateTime date, string culture, string url, string comment)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.CommentAddedToRemark, culture);
             var emailMessage = CreateMessage(email, template.Subject);
@@ -84,14 +86,15 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
                 EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
-                EmailTemplateParameter.Create("comment", comment));
+                EmailTemplateParameter.Create("comment", comment),
+                EmailTemplateParameter.Create("url", url));
 
             Logger.Debug($"Sending {EmailTemplates.CommentAddedToRemark} email to {email} via sendgrid");
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
         public async Task SendPhotosAddedToRemarkEmailAsync(string email, Guid remarkId, string category, string address, string username,
-            DateTime date, string culture)
+            DateTime date, string culture, string url)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.PhotosAddedToRemark, culture);
             var emailMessage = CreateMessage(email, template.Subject);
@@ -100,7 +103,8 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
                 EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)));
+                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
+                EmailTemplateParameter.Create("url", url));
 
             await _sendGridClient.SendMessageAsync(emailMessage);
         }

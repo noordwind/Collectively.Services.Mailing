@@ -9,18 +9,18 @@ namespace Collectively.Services.Mailing.Services
 
         Task SendRemarkCreatedAsync(string email, Guid remarkId, 
             string category, string address, string username,
-            DateTime date, string culture);
+            DateTime date, string culture, string url);
 
         Task SendRemarkStateChangedAsync(string email, Guid remarkId,
             string category, string address, string username,
-            DateTime date, string culture, string state);
+            DateTime date, string culture, string url, string state);
 
         Task SendCommentAddedToRemarkAsync(string email, Guid remarkId,
             string category, string address, string username,
-            DateTime date, string culture, string comment);
+            DateTime date, string culture, string url, string comment);
 
         Task SendPhotosAddedToRemarkEmailAsync(string email, Guid remarkId,
             string category, string address, string username,
-            DateTime date, string culture);
+            DateTime date, string culture, string url);
     }
 }

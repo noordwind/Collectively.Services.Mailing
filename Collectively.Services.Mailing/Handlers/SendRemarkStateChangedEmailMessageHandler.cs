@@ -25,7 +25,8 @@ namespace Collectively.Services.Mailing.Handlers
                 {
                     await _emailMessenger.SendRemarkStateChangedAsync(command.Email,
                         command.RemarkId, command.Category, command.Address,
-                        command.Username, command.Date, command.Culture, command.State);
+                        command.Username, command.Date, command.Culture,
+                        command.RemarkUrl, command.State);
                 })
                 .OnError((ex, logger) => logger.Error(ex, $"Error while handling {command.GetType().Name} command"))
                 .ExecuteAsync();
