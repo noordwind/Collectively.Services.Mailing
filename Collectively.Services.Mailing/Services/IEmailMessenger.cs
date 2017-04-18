@@ -20,7 +20,6 @@ namespace Collectively.Services.Mailing.Services
             DateTime date, string culture, string url, string comment);
 
         Task SendPhotosAddedToRemarkEmailAsync(string email, Guid remarkId,
-            string category, string address, string username,
-            DateTime date, string culture, string url);
+            string category, string address, string culture, string url);
     }
 }

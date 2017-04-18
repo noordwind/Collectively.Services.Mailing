@@ -93,8 +93,8 @@ namespace Collectively.Services.Mailing.Services
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
-        public async Task SendPhotosAddedToRemarkEmailAsync(string email, Guid remarkId, string category, string address, string username,
-            DateTime date, string culture, string url)
+        public async Task SendPhotosAddedToRemarkEmailAsync(string email, Guid remarkId, string category,
+            string address, string culture, string url)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.PhotosAddedToRemark, culture);
             var emailMessage = CreateMessage(email, template.Subject);
@@ -102,8 +102,6 @@ namespace Collectively.Services.Mailing.Services
                 EmailTemplateParameter.Create("remarkId", remarkId.ToString()),
                 EmailTemplateParameter.Create("category", category),
                 EmailTemplateParameter.Create("address", address),
-                EmailTemplateParameter.Create("username", username),
-                EmailTemplateParameter.Create("date", GetDateTimeString(date, culture)),
                 EmailTemplateParameter.Create("url", url));
 
             await _sendGridClient.SendMessageAsync(emailMessage);

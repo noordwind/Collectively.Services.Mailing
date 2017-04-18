@@ -46,6 +46,9 @@ namespace Collectively.Services.Mailing.Services
             yield return new EmailTemplate("Remark created", EmailTemplates.RemarkCreated,
                 "fdd82538-cb92-47ad-9258-a0bcb126505e", "en-gb",
                 "Collectively - Remark created");
+            yield return new EmailTemplate("Remark created", EmailTemplates.RemarkCreated,
+                "7b1d8a8c-4d03-406f-ac56-a3f278a43b0d", "pl-pl",
+                "Collectively - Zgłoszenie dodane");
         }
 
         private IEnumerable<EmailTemplate> GetRemarkStateChangedTemplates()
@@ -53,6 +56,9 @@ namespace Collectively.Services.Mailing.Services
             yield return new EmailTemplate("Remark state changed", EmailTemplates.RemarkStateChanged,
                 "783a186e-5caf-458d-98db-b22f8a04583b", "en-gb", 
                 "Collectively - Remark state changed");
+            yield return new EmailTemplate("Remark state changed", EmailTemplates.RemarkStateChanged,
+                "5f558a60-bcfc-498a-88d2-decb41b6265b", "pl-pl",
+                "Collectively - Nowy status zgłoszenia");
         }
 
         private IEnumerable<EmailTemplate> GetPhotosAddedToRemarkTemplates()
@@ -60,6 +66,9 @@ namespace Collectively.Services.Mailing.Services
             yield return new EmailTemplate("Photos added to remark", EmailTemplates.PhotosAddedToRemark,
                 "f85beaed-6bf1-4b2d-b088-ae2617ed6cce", "en-gb",
                 "Collectively - New photos added to remark");
+            yield return new EmailTemplate("Photos added to remark", EmailTemplates.PhotosAddedToRemark,
+                "c0ebffbc-7bbc-4b1d-9238-733541cefa71", "pl-pl",
+                "Collectively - Dodano nowe zdjęcie do zgłoszenia");
         }
 
         private IEnumerable<EmailTemplate> GetCommentAddedToRemarkTemplates()
@@ -67,6 +76,9 @@ namespace Collectively.Services.Mailing.Services
             yield return new EmailTemplate("Comment added to remark", EmailTemplates.CommentAddedToRemark,
                 "087a9ca3-dc1a-4b91-b985-496f82279690", "en-gb",
                 "Collectively - New comments added to remark");
+            yield return new EmailTemplate("Comment added to remark", EmailTemplates.CommentAddedToRemark,
+                "e84b81d2-b398-44bb-a41d-4526b4af7bfc", "pl-pl",
+                "Collectively - Nowy komentarz do zgłoszenia");
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Collectively.Services.Mailing.Handlers
                 {
                     await _emailMessenger.SendPhotosAddedToRemarkEmailAsync(command.Email,
                         command.RemarkId, command.Category, command.Address,
-                        command.Username, command.Date, command.Culture, command.RemarkUrl);
+                        command.Culture, command.RemarkUrl);
                 })
                 .OnError((ex, logger) => logger.Error(ex, $"Error while handling {command.GetType().Name} command"))
                 .ExecuteAsync();
