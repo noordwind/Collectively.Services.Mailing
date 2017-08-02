@@ -7,6 +7,8 @@ namespace Collectively.Services.Mailing.Services
     {
         Task SendResetPasswordAsync(string email, string endpoint, string token, string culture);
 
+        Task SendActivateAccountAsync(string email, string endpoint, string token, string culture);
+
         Task SendRemarkCreatedAsync(string email, Guid remarkId, 
             string category, string address, string username,
             DateTime date, string culture, string url);

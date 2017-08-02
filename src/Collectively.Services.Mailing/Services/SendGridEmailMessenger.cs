@@ -39,6 +39,11 @@ namespace Collectively.Services.Mailing.Services
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
+        public Task SendActivateAccountAsync(string email, string endpoint, string token, string culture)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task SendRemarkCreatedAsync(string email, Guid remarkId, 
             string category, string address, string username, 
             DateTime date, string culture, string url)
