@@ -39,6 +39,20 @@ namespace Collectively.Services.Mailing.Services
             await _sendGridClient.SendMessageAsync(emailMessage);
         }
 
+        public async Task SendActivateAccountAsync(string email, string username,
+            string endpoint, string token, string culture)
+        {
+            var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.ActivateAccount, culture);
+            var activateAccountUrl = $"{endpoint}?email={email}&token={token}";
+            var emailMessage = CreateMessage(email, template.Subject);
+            ApplyTemplate(template.TemplateId, emailMessage,
+                EmailTemplateParameter.Create("url", activateAccountUrl),
+                EmailTemplateParameter.Create("username", username));
+            Logger.Debug($"Sending {EmailTemplates.ActivateAccount} email to {email} via sendgrid");
+
+            await _sendGridClient.SendMessageAsync(emailMessage);
+        }
+
         public async Task SendRemarkCreatedAsync(string email, Guid remarkId, 
             string category, string address, string username, 
             DateTime date, string culture, string url)

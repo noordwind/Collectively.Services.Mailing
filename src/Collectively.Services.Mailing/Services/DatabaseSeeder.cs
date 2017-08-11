@@ -24,6 +24,7 @@ namespace Collectively.Services.Mailing.Services
 
             var seedTemplates = new List<EmailTemplate>();
             seedTemplates.AddRange(GetResetPasswordTemplates());
+            seedTemplates.AddRange(GetActivateAccountTemplates());
             seedTemplates.AddRange(GetRemarkCreatedTemplates());
             seedTemplates.AddRange(GetRemarkStateChangedTemplates());
             seedTemplates.AddRange(GetPhotosAddedToRemarkTemplates());
@@ -37,11 +38,23 @@ namespace Collectively.Services.Mailing.Services
             yield return new EmailTemplate("Reset password", EmailTemplates.ResetPassword,
                 "4febd104-85b1-4b57-a07f-85805b4e4241", "en-gb", "Reset password");
 
-            yield return new EmailTemplate("Resetowanie hasła", EmailTemplates.ResetPassword,
+            yield return new EmailTemplate("Reset password", EmailTemplates.ResetPassword,
                 "f2d8bbfe-ed9b-4cd1-ba07-7f4e1541cb1a", "pl-pl", "Resetowanie hasła");
 
-            yield return new EmailTemplate("Resetowanie hasła", EmailTemplates.ResetPassword,
+            yield return new EmailTemplate("Reset password", EmailTemplates.ResetPassword,
                 "48514453-434a-4f38-983f-d8ef9df04bb4", "de-de", "Passwort zurücksetzen");
+        }
+
+        private IEnumerable<EmailTemplate> GetActivateAccountTemplates()
+        {
+            yield return new EmailTemplate("Activate account", EmailTemplates.ActivateAccount,
+                "79213e9c-f0f9-4b5c-b455-209a60c242a3", "en-gb", "Collectively - Activate account");
+
+            yield return new EmailTemplate("Activate account", EmailTemplates.ActivateAccount,
+                "d586e5ff-3632-450c-9d79-603f32c25cee", "pl-pl", "Collectively - Aktywuj konto");
+
+            yield return new EmailTemplate("Activate account", EmailTemplates.ActivateAccount,
+                "7bfd026b-b59c-43ba-b7f1-19d743943f22", "de-de", "Collectively - Konto aktivieren");
         }
 
         private IEnumerable<EmailTemplate> GetRemarkCreatedTemplates()
