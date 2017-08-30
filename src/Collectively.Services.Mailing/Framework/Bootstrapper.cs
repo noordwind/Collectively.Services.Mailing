@@ -18,7 +18,7 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Configuration;
-using NLog;
+using Serilog;
 using Polly;
 using RabbitMQ.Client.Exceptions;
 using RawRabbit.Configuration;
@@ -27,7 +27,7 @@ namespace Collectively.Services.Mailing.Framework
 {
     public class Bootstrapper : AutofacNancyBootstrapper
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private static IExceptionHandler _exceptionHandler;
         private readonly IConfiguration _configuration;
         public static ILifetimeScope LifetimeScope { get; private set; }
@@ -103,7 +103,7 @@ namespace Collectively.Services.Mailing.Framework
             };
             pipelines.SetupTokenAuthentication(container);
             _exceptionHandler = container.Resolve<IExceptionHandler>();
-            Logger.Info("Collectively.Services.Mailing API has started.");
+            Logger.Information("Collectively.Services.Mailing API has started.");
         }
     }
 }

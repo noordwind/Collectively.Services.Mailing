@@ -6,13 +6,13 @@ using Collectively.Common.Domain;
 using Collectively.Services.Mailing.Domain;
 
 using Newtonsoft.Json;
-using NLog;
+using Serilog;
 
 namespace Collectively.Services.Mailing.Services
 {
     public class SendGridClient : ISendGridClient
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private readonly SendGridSettings _sendGridSettings;
         private readonly HttpClient _httpClient;
 
@@ -29,13 +29,13 @@ namespace Collectively.Services.Mailing.Services
         {
             _httpClient.DefaultRequestHeaders.Remove("Authorization");
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_sendGridSettings.ApiKey}");
-            Logger.Info("Sending an email message via SendGrid.");
+            Logger.Information("Sending an email message via SendGrid.");
             var payload = JsonConvert.SerializeObject(message);
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("mail/send", content);
             if (response.IsSuccessStatusCode)
             {
-                Logger.Info("An email message has been sent successfully via SendGrid.");
+                Logger.Information("An email message has been sent successfully via SendGrid.");
 
                 return;
             }

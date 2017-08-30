@@ -7,13 +7,13 @@ using Collectively.Common.Domain;
 using Collectively.Common.Extensions;
 using Collectively.Services.Mailing.Domain;
 using Collectively.Services.Mailing.Repositories;
-using NLog;
+using Serilog;
 
 namespace Collectively.Services.Mailing.Services
 {
     public class SendGridEmailMessenger : IEmailMessenger
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = Log.Logger;
         private readonly ISendGridClient _sendGridClient;
         private readonly IEmailTemplateRepository _emailTemplateRepository;
         private readonly SendGridSettings _sendGridSettings;
