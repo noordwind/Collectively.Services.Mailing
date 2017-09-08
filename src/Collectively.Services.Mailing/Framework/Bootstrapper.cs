@@ -65,7 +65,7 @@ namespace Collectively.Services.Mailing.Framework
                 builder.RegisterType<ExceptionlessExceptionHandler>().As<IExceptionHandler>().SingleInstance();
 
                 var assembly = typeof(Startup).GetTypeInfo().Assembly;
-                builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>));
+                builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>)).InstancePerLifetimeScope();
 
                 SecurityContainer.Register(builder, _configuration);
                 RabbitMqContainer.Register(builder, _configuration.GetSettings<RawRabbitConfiguration>());
@@ -75,6 +75,7 @@ namespace Collectively.Services.Mailing.Framework
 
         protected override void RequestStartup(ILifetimeScope container, IPipelines pipelines, NancyContext context)
         {
+            pipelines.SetupTokenAuthentication(container.Resolve<IJwtTokenHandler>());
             pipelines.OnError.AddItemToEndOfPipeline((ctx, ex) =>
             {
                 _exceptionHandler.Handle(ex, ctx.ToExceptionData(),
@@ -101,7 +102,6 @@ namespace Collectively.Services.Mailing.Framework
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers",
                     "Authorization, Origin, X-Requested-With, Content-Type, Accept");
             };
-            pipelines.SetupTokenAuthentication(container);
             _exceptionHandler = container.Resolve<IExceptionHandler>();
             Logger.Information("Collectively.Services.Mailing API has started.");
         }
