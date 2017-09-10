@@ -6,7 +6,7 @@ using Collectively.Messages.Commands;
 using Collectively.Common.Exceptionless;
 using Collectively.Common.Extensions;
 using Collectively.Common.Mongo;
-using Collectively.Common.Nancy;
+using Collectively.Common.NancyFx;
 using Collectively.Common.Security;
 using Collectively.Common.RabbitMq;
 using Collectively.Common.Services;
