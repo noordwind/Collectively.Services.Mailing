@@ -5,6 +5,7 @@ namespace Collectively.Services.Mailing.Services
 {
     public interface IEmailMessenger
     {
+        Task SendSupportAsync(string email, string name, string title, string message);
         Task SendResetPasswordAsync(string email, string endpoint, string token, string culture);
 
         Task SendActivateAccountAsync(string email, string username,

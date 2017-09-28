@@ -27,6 +27,14 @@ namespace Collectively.Services.Mailing.Services
             _sendGridSettings = sendGridSettings;
         }
 
+        public async Task SendSupportAsync(string email, string name, string title, string message)
+        {
+            var emailMessage = CreateMessage(_sendGridSettings.SupportEmailAccount,
+                title, message, email);
+            Logger.Debug($"Sending support email from {email} via sendgrid");
+            await _sendGridClient.SendMessageAsync(emailMessage);
+        }
+
         public async Task SendResetPasswordAsync(string email, string endpoint, string token, string culture)
         {
             var template = await GetTemplateOrFallbackToDefaultOrFailAsync(EmailTemplates.ResetPassword, culture);
@@ -136,13 +144,13 @@ namespace Collectively.Services.Mailing.Services
         }
 
         private SendGridEmailMessage CreateMessage(string receiver,
-            string subject, string message = null)
+            string subject, string message = null, string sender = null)
         {
             var emailMessage = new SendGridEmailMessage
             {
                 From = new SendGridEmailMessage.Person
                 {
-                    Email = _sendGridSettings.NoReplyEmailAccount
+                    Email = sender.Empty() ? _sendGridSettings.NoReplyEmailAccount : sender
                 },
                 Subject = subject,
                 Personalizations = new List<SendGridEmailMessage.Personalization>()

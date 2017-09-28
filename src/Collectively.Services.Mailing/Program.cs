@@ -12,6 +12,7 @@ namespace Collectively.Services.Mailing
                 .Create<Startup>(args: args)
                 .UseAutofac(Bootstrapper.LifetimeScope)
                 .UseRabbitMq(queueName: typeof(Program).Namespace)
+                .SubscribeToCommand<SendSupportEmailMessage>()
                 .SubscribeToCommand<SendResetPasswordEmailMessage>()
                 .SubscribeToCommand<SendActivateAccountEmailMessage>()
                 .SubscribeToCommand<SendRemarkCreatedEmailMessage>()

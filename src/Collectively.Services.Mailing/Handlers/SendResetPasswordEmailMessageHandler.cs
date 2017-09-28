@@ -2,7 +2,6 @@
 using Collectively.Messages.Commands;
 using Collectively.Common.Services;
 using Collectively.Services.Mailing.Services;
-
 using Collectively.Messages.Commands.Mailing;
 using Collectively.Messages.Events.Users;
 using RawRabbit;
